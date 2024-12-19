@@ -1,0 +1,32 @@
+# Ignore the build output directories
+/bin/
+/obj/
+
+# User-specific files
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET
+wwwroot/
+
+# Environment variables file
+.env
+
+# MacOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# JetBrains Rider config folder
+.idea/
+
+# VS Code config folder
+.vscode/

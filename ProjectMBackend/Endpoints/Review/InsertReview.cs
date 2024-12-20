@@ -1,18 +1,16 @@
 ﻿using MongoDB.Driver;
-using ProjectMBackend.Models;
 
-namespace ProjectMBackend.Endpoints
+namespace ProjectMBackend.Endpoints.Review
 {
     public class InsertReview
     {
         public static void Map(WebApplication app)
         {
-            app.MapPost("/Reviews/Insert", async (Review review, IMongoDatabase db ) =>
+            app.MapPost("/Reviews/Insert", async (Models.Review review, IMongoDatabase db) =>
             {
                 try
                 {
-                    var reviewsCollection = db.GetCollection<Review>("Reviews");
-
+                    var reviewsCollection = db.GetCollection<Models.Review>("Reviews");
                     await reviewsCollection.InsertOneAsync(review);
 
                     return Results.Created($"/Reviews/{review.Id}", review);

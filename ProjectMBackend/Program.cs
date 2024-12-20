@@ -1,4 +1,4 @@
-using ProjectMBackend.Endpoints;
+using ProjectMBackend.Endpoints.Review;
 
 var builder = WebApplication.CreateBuilder(args);
 

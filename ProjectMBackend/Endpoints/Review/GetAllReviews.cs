@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
-using ProjectMBackend.Models;
 
-namespace ProjectMBackend.Endpoints
+namespace ProjectMBackend.Endpoints.Review
 {
     public class GetAllReviews
     {
@@ -9,7 +8,7 @@ namespace ProjectMBackend.Endpoints
         {
             app.MapGet("/Reviews/FindAll/{id}", async (int id, IMongoDatabase db) =>
             {
-                var reviewsCollection = db.GetCollection<Review>("reviews");
+                var reviewsCollection = db.GetCollection<Models.Review>("reviews");
 
                 var reviews = await reviewsCollection
                     .Find(review => review.UserId == id)
@@ -21,7 +20,6 @@ namespace ProjectMBackend.Endpoints
                 }
 
                 return Results.Ok(reviews);
-               
             });
         }
     }

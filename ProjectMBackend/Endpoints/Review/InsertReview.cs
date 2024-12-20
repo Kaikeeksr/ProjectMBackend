@@ -10,7 +10,7 @@ namespace ProjectMBackend.Endpoints.Review
             {
                 try
                 {
-                    var reviewsCollection = db.GetCollection<Models.Review>("Reviews");
+                    var reviewsCollection = db.GetCollection<Models.Review>("reviews");
                     await reviewsCollection.InsertOneAsync(review);
 
                     return Results.Created($"/Reviews/{review.Id}", review);
@@ -23,3 +23,4 @@ namespace ProjectMBackend.Endpoints.Review
         }
     }
 }
+                

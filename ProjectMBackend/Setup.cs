@@ -9,10 +9,12 @@ public static class Setup
         Env.Load();
 
         // Verificação das variáveis de ambiente
-        string dbUser = Environment.GetEnvironmentVariable("DB_USER") 
+        string dbUser = Environment.GetEnvironmentVariable("DB_USER")
             ?? throw new InvalidOperationException("DB_USER not found in environment variables");
-        string dbPass = Environment.GetEnvironmentVariable("DB_PASS") 
+        string dbPass = Environment.GetEnvironmentVariable("DB_PASS")
             ?? throw new InvalidOperationException("DB_PASS not found in environment variables");
+        string jwtKey = Environment.GetEnvironmentVariable("JWT_KEY")
+            ?? throw new InvalidOperationException("JWT_KEY not found in environment variables");
 
         // Construção da string de conexão
         string connectionString = $"mongodb+srv://{dbUser}:{dbPass}@db-projectm.dqdjc.mongodb.net/?retryWrites=true&w=majority&appName=db-projectM";
@@ -29,11 +31,13 @@ public static class Setup
             return mongoClient.GetDatabase("projectM");
         });
 
-        // Registro da coleção de usuários (?) --> pesquisar prpósito/possível utilidade
         builder.Services.AddScoped<IMongoCollection<User>>(serviceProvider =>
         {
             var database = serviceProvider.GetRequiredService<IMongoDatabase>();
             return database.GetCollection<User>("users");
         });
+
+        // Registro da chave JWT como Singleton
+        builder.Services.AddSingleton(jwtKey);
     }
 }

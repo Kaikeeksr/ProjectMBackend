@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using ProjectMBackend.AuthModel;
 
 namespace ProjectMBackend.Endpoints.User
 {
@@ -6,11 +7,10 @@ namespace ProjectMBackend.Endpoints.User
     {
         public static void Map(WebApplication app)
         {
-            app.MapPost("/User/Login", async (Models.Login l, IMongoDatabase db) =>
+            app.MapPost("/User/Login", async (Models.Login l, IMongoDatabase db, Auth auth) =>
             {
-
                 var userCollection = db.GetCollection<Models.User>("users");
-                var user = userCollection.Find(x => x.Username == l.Username).FirstOrDefault();
+                var user = await userCollection.Find(x => x.Username == l.Username).FirstOrDefaultAsync();
 
                 if (user == null || !VerifyPass(l.Password, user))
                 {
@@ -22,8 +22,14 @@ namespace ProjectMBackend.Endpoints.User
                     });
                 }
 
-                return Results.Ok($"Usuário {user.Username} foi encontrado");
-                //gerar token JWT
+                var token = auth.GenerateJwt(user);
+
+                return Results.Ok(new
+                {
+                    message = "Login efetuado com sucesso",
+                    token = token
+                });
+
             });
         }
 

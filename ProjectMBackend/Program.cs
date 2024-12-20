@@ -1,4 +1,5 @@
 using MongoDB.Driver;
+using ProjectMBackend.AuthModel;
 using ProjectMBackend.Endpoints.Review;
 using ProjectMBackend.Endpoints.User;
 using ProjectMBackend.Models;
@@ -10,6 +11,7 @@ Setup.ConfigureAppSettings(builder);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<Auth>();
 
 var app = builder.Build();
 

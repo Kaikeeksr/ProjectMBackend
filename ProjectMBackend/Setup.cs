@@ -199,6 +199,32 @@ public static class Setup
 
     public static void ConfigureMiddleware(WebApplication app)
     {
+        app.Use(async (context, next) =>
+        {
+            try
+            {
+                await next();
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro: {ex.Message}");
+                Console.WriteLine($"StackTrace: {ex.StackTrace}");
+
+                // Opcionalmente, você pode retornar uma resposta mais amigável
+                context.Response.StatusCode = 500;
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsJsonAsync(new
+                {
+                    error = "Erro interno do servidor",
+                    message = ex.Message,
+                    // Em produção, você pode querer omitir o stackTrace por segurança
+                    stackTrace = app.Environment.IsDevelopment() ? ex.StackTrace : null
+                });
+            }
+
+        });
+
         // Adiciona UseResponseCompression antes de qualquer middleware que gera resposta
         app.UseResponseCompression();
 

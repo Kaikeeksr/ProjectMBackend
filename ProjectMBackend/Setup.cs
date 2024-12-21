@@ -79,7 +79,7 @@ public static class Setup
     {
         var dbUser = Environment.GetEnvironmentVariable("DB_USER");
         var dbPass = Environment.GetEnvironmentVariable("DB_PASS");
-        return $"mongodb+srv://{dbUser}:{dbPass}@db-projectm.dqdjc.mongodb.net/?retryWrites=true&w=majority&appName=db-projectM";
+        return $"mongodb+srv://{dbUser}:{dbPass}@db-projectm.dqdjc.mongodb.net/?retryWrites=true&w=majority&appName=db-projectM&ssl=true&tls=true";
     }
 
     public static void ConfigureAuthentication(WebApplicationBuilder builder)

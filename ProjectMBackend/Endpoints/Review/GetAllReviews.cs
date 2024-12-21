@@ -20,7 +20,8 @@ namespace ProjectMBackend.Endpoints.Review
                 }
 
                 return Results.Ok(reviews);
-            });
+            })
+            .RequireAuthorization();
         }
     }
 }

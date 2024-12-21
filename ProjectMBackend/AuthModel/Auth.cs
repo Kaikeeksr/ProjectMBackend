@@ -1,8 +1,8 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using DotNetEnv;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using DotNetEnv;
 
 namespace ProjectMBackend.AuthModel
 {
@@ -18,21 +18,21 @@ namespace ProjectMBackend.AuthModel
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            
+
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),      
-                new Claim("username", user.Username),                       
-                new Claim("name", $"{user.FirstName} {user.LastName}")      
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim("username", user.Username),
+                new Claim("name", $"{user.FirstName} {user.LastName}")
             };
 
-            
+
             var token = new JwtSecurityToken(
-                issuer: "ProjectM", 
-                audience: "Users", 
+                issuer: "https://localhost:3000",
+                audience: "client-test",
                 claims: claims,
-                expires: DateTime.Now.AddHours(1), 
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: credentials
             );
 

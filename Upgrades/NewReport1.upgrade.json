@@ -1,0 +1,484 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": true
+    },
+    "targetId": "",
+    "targetDisplayName": ".NET 9.0"
+  },
+  "analysisStartTime": "2024-12-21T13:44:30.1053251Z",
+  "analysisEndTime": "2024-12-21T13:44:30.7503328Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 1,
+      "issues": 2,
+      "incidents": 16,
+      "effort": 16
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 16,
+        "Optional": 0,
+        "Potential": 0,
+        "Information": 0
+      },
+      "category": {
+        "Project": 1,
+        "Api": 15
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "ProjectMBackend\\ProjectMBackend.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 16,
+      "ruleInstances": [
+        {
+          "incidentId": "5f13a8e4-2796-42a4-b06f-1adcd6dc50a7",
+          "ruleId": "Project.0002",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Atual: net8.0\nNovo: net9.0",
+              "protected": "Atual: net8.0\nNovo: net9.0"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\ProjectMBackend.csproj",
+            "snippet": "Atual: net8.0\nNovo: net9.0",
+            "protectedSnippet": "Atual: net8.0\nNovo: net9.0"
+          }
+        },
+        {
+          "incidentId": "b1a272a9-a801-4723-907c-051fdd09cc3e",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+              "protected": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+            "protectedSnippet": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email",
+            "label": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Email",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtregisteredclaimnames.email",
+                "isCustom": false
+              }
+            ],
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "4a823130-f5b7-4f98-a79c-761249387184",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));",
+              "protected": "M:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey.#ctor(System.Byte[])"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));",
+            "protectedSnippet": "M:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey.#ctor(System.Byte[])",
+            "label": "M:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey.#ctor(System.Byte[])",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.symmetricsecuritykey.symmetricsecuritykey",
+                "isCustom": false
+              }
+            ],
+            "line": 17,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "ee43ca9f-8453-49a7-9545-801dd6f4766c",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+              "protected": "M:Microsoft.IdentityModel.Tokens.SigningCredentials.#ctor(Microsoft.IdentityModel.Tokens.SecurityKey,System.String)"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+            "protectedSnippet": "M:Microsoft.IdentityModel.Tokens.SigningCredentials.#ctor(Microsoft.IdentityModel.Tokens.SecurityKey,System.String)",
+            "label": "M:Microsoft.IdentityModel.Tokens.SigningCredentials.#ctor(Microsoft.IdentityModel.Tokens.SecurityKey,System.String)",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.signingcredentials.signingcredentials",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "627879dc-1b6d-4567-a9ff-19c8e529e36a",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));",
+              "protected": "T:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));",
+            "protectedSnippet": "T:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey",
+            "label": "T:Microsoft.IdentityModel.Tokens.SymmetricSecurityKey",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.symmetricsecuritykey",
+                "isCustom": false
+              }
+            ],
+            "line": 17,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d0e34299-bd49-4d8d-a939-158202169e4e",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var token = new JwtSecurityToken(\r\n                issuer: \u0022ProjectM\u0022,\r\n                audience: \u0022Users\u0022,\r\n                claims: claims,\r\n                expires: DateTime.Now.AddHours(1),\r\n                signingCredentials: credentials\r\n            );",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var token = new JwtSecurityToken(\r\n                issuer: \u0022ProjectM\u0022,\r\n                audience: \u0022Users\u0022,\r\n                claims: claims,\r\n                expires: DateTime.Now.AddHours(1),\r\n                signingCredentials: credentials\r\n            );",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityToken.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Nullable{System.DateTime},System.Nullable{System.DateTime},Microsoft.IdentityModel.Tokens.SigningCredentials)",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytoken.jwtsecuritytoken",
+                "isCustom": false
+              }
+            ],
+            "line": 30,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "675e7111-60b9-486d-afca-6ad055ae5b23",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+              "protected": "T:Microsoft.IdentityModel.Tokens.SigningCredentials"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+            "protectedSnippet": "T:Microsoft.IdentityModel.Tokens.SigningCredentials",
+            "label": "T:Microsoft.IdentityModel.Tokens.SigningCredentials",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.signingcredentials",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "e5b7343e-091c-4dbc-8863-68be79e6a5bf",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtregisteredclaimnames",
+                "isCustom": false
+              }
+            ],
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "d7264a3a-ae21-404d-8b41-f0e47ec195ed",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+              "protected": "F:Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+            "protectedSnippet": "F:Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256",
+            "label": "F:Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.securityalgorithms.hmacsha256",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "0e3000b6-b9e5-41ca-8f97-04b47a52fe90",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+              "protected": "T:Microsoft.IdentityModel.Tokens.SecurityAlgorithms"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);",
+            "protectedSnippet": "T:Microsoft.IdentityModel.Tokens.SecurityAlgorithms",
+            "label": "T:Microsoft.IdentityModel.Tokens.SecurityAlgorithms",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/microsoft.identitymodel.tokens.securityalgorithms",
+                "isCustom": false
+              }
+            ],
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "cddbf927-6e8c-4ef1-9db8-f60d5ff25803",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new JwtSecurityTokenHandler().WriteToken(token);",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "return new JwtSecurityTokenHandler().WriteToken(token);",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytokenhandler",
+                "isCustom": false
+              }
+            ],
+            "line": 38,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "42c3f467-f94a-4c37-8dca-f953f897d945",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+              "protected": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+            "protectedSnippet": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub",
+            "label": "F:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Sub",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtregisteredclaimnames.sub",
+                "isCustom": false
+              }
+            ],
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "1b28334f-d38a-44be-aa16-ad651b96f89c",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new JwtSecurityTokenHandler().WriteToken(token);",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "return new JwtSecurityTokenHandler().WriteToken(token);",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.#ctor",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytokenhandler.jwtsecuritytokenhandler",
+                "isCustom": false
+              }
+            ],
+            "line": 38,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "efa30b5c-5b94-46cc-b7d6-79800ff2c11f",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var claims = new[]\r\n            {\r\n                new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),\r\n                new Claim(JwtRegisteredClaimNames.Email, user.Email),\r\n                new Claim(\u0022username\u0022, user.Username),\r\n                new Claim(\u0022name\u0022, $\u0022{user.FirstName} {user.LastName}\u0022)\r\n            };",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtregisteredclaimnames",
+                "isCustom": false
+              }
+            ],
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "62b56c79-bc74-4dbe-b29d-ffb338c2a443",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "return new JwtSecurityTokenHandler().WriteToken(token);",
+              "protected": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "return new JwtSecurityTokenHandler().WriteToken(token);",
+            "protectedSnippet": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)",
+            "label": "M:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.WriteToken(Microsoft.IdentityModel.Tokens.SecurityToken)",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytokenhandler.writetoken",
+                "isCustom": false
+              }
+            ],
+            "line": 38,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "faebdf12-f09a-455f-9a10-33f7637f99da",
+          "ruleId": "Api.0001",
+          "projectPath": "ProjectMBackend\\ProjectMBackend.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var token = new JwtSecurityToken(\r\n                issuer: \u0022ProjectM\u0022,\r\n                audience: \u0022Users\u0022,\r\n                claims: claims,\r\n                expires: DateTime.Now.AddHours(1),\r\n                signingCredentials: credentials\r\n            );",
+              "protected": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken"
+            },
+            "kind": "File",
+            "path": "ProjectMBackend\\AuthModel\\Auth.cs",
+            "snippet": "var token = new JwtSecurityToken(\r\n                issuer: \u0022ProjectM\u0022,\r\n                audience: \u0022Users\u0022,\r\n                claims: claims,\r\n                expires: DateTime.Now.AddHours(1),\r\n                signingCredentials: credentials\r\n            );",
+            "protectedSnippet": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken",
+            "label": "T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken",
+            "links": [
+              {
+                "title": "Documenta\u00E7\u00E3o da API",
+                "url": "https://learn.microsoft.com/dotnet/api/system.identitymodel.tokens.jwt.jwtsecuritytoken",
+                "isCustom": false
+              }
+            ],
+            "line": 30,
+            "column": 12
+          }
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "Project.0002": {
+      "id": "Project.0002",
+      "description": "As estruturas de destino do projeto precisam ser alteradas para a nova estrutura de destino que voc\u00EA selecionou para esta atualiza\u00E7\u00E3o.\n\nDurante a atualiza\u00E7\u00E3o, a estrutura de destino ser\u00E1 ajustada para a plataforma correspondente, quando aplic\u00E1vel. Em alguns casos, o projeto resultaria em v\u00E1rias estruturas de destino ap\u00F3s a atualiza\u00E7\u00E3o se estivesse usando recursos que agora t\u00EAm suas pr\u00F3prias plataformas em estruturas .NET modernas (Windows, iOS, Android etc.).",
+      "label": "As estruturas de destino do projeto precisam ser alteradas",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Vis\u00E3o geral da portabilidade do .NET Framework para o .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": "SDKs do projeto .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0001": {
+      "id": "Api.0001",
+      "description": "A API n\u00E3o existe na vers\u00E3o selecionada do .NET. Consulte a documenta\u00E7\u00E3o de altera\u00E7\u00F5es interruptivas para obter funcionalidade alternativa ou de substitui\u00E7\u00E3o.",
+      "label": "A API n\u00E3o existe",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "Altera\u00E7\u00F5es interruptivas no .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}

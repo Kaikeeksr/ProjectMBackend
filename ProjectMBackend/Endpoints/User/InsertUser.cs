@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using ProjectMBackend.Models;
 
 namespace ProjectMBackend.Endpoints.User
 {
@@ -17,7 +16,7 @@ namespace ProjectMBackend.Endpoints.User
                         message = $"O usuário {u.Username} já existe. Tente outro username",
                         status = "NOT_OK"
                     });
-                } 
+                }
 
                 try
                 {

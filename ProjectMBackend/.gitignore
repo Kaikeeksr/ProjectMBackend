@@ -1,6 +1,7 @@
 # Ignore the build output directories
 /bin/
 /obj/
+/Updates/
 
 # User-specific files
 *.user

@@ -6,11 +6,14 @@ namespace ProjectMBackend.Models
     public class Review
     {
         [BsonId] // Atributo para mapear o campo _id do MongoDB para a propriedade Id
-        public required ObjectId Id { get; set; }
-        public required int ReviewId { get; set; }
+        public ObjectId Id { get; set; }
+        public required string UserId { get; set; }
+        public required string MovieApiId { get; set; }
         [BsonElement("Rating")] // Mapeia explicitamente o campo "Rating" do MongoDB para a propriedade Rating
         public required double Rating { get; set; }
         public required string MovieName { get; set; }
-        public required int UserId { get; set; }
+        public string? MovieCoverUrl { get; set; }
+        public required string MovieDirector { get; set; }
+        public required string MovieReleaseYear { get; set; }
     }
 }

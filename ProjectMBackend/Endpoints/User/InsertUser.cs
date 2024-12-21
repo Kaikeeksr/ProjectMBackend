@@ -22,6 +22,7 @@ namespace ProjectMBackend.Endpoints.User
                 {
                     u.Password = BCrypt.Net.BCrypt.HashPassword(u.Password);
                     u.CreatedAt = DateTime.Now;
+                    u.IsActive = true;
 
                     var userCollection = db.GetCollection<Models.User>("users");
                     await userCollection.InsertOneAsync(u);

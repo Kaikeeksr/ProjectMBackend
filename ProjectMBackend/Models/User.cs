@@ -15,7 +15,6 @@ namespace ProjectMBackend.Models
         public required string Username { get; set; }
         public required string Password { get; set; }
         public required string Email { get; set; }
-        public required string DateOfBirth { get; set; }
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }

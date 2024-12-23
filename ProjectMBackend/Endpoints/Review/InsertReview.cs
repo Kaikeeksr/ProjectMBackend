@@ -8,12 +8,14 @@ namespace ProjectMBackend.Endpoints.Review
         {
             app.MapPost("/Reviews/Insert", async (Models.Review r, IMongoDatabase db) =>
             {
+                r.CreatedAt = DateTime.Now;
+
                 try
                 {
                     var reviewsCollection = db.GetCollection<Models.Review>("reviews");
                     await reviewsCollection.InsertOneAsync(r);
 
-                    return Results.Created($"/Reviews/{r.Id}", r);
+                    return Results.Created($"/Reviews/{r.ReviewId}", r);
                 }
                 catch (Exception ex)
                 {

@@ -20,7 +20,45 @@ public static class Setup
         ConfigureMongoDb(builder);
         ConfigureAuthentication(builder);
         ConfigureCompression(builder);
+        ConfigureCors(builder);
         ConfigureBasicServices(builder);
+    }
+    private static void ConfigureEnvironment()
+    {
+        Env.Load();
+        ValidateEnvironmentVariables();
+    }
+
+    private static void ValidateEnvironmentVariables()
+    {
+        var requiredVars = new[] { "DB_USER", "DB_PASS", "JWT_KEY", "LOCALHOST" };
+        foreach (var varName in requiredVars)
+        {
+            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable(varName)))
+            {
+                throw new InvalidOperationException($"A variável {varName} não foi encontrado no arquivo de ambiente.");
+            }
+        }
+    }
+
+    private static void ConfigureCors(WebApplicationBuilder builder)
+    {
+        builder.Services.AddCors(options =>
+        {
+            var localhost = Environment.GetEnvironmentVariable("LOCALHOST");
+
+            if (string.IsNullOrEmpty(localhost))
+            {
+                throw new ArgumentNullException(nameof(localhost), "Environment variable 'LOCAHOST' is not set.");
+            }
+
+            options.AddPolicy("AllowSpecificOrigin", builder =>
+            {
+                builder.WithOrigins(localhost)
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+        });
     }
 
     private static void ConfigureCompression(WebApplicationBuilder builder)
@@ -42,24 +80,6 @@ public static class Setup
         {
             options.Level = CompressionLevel.Fastest; // Balanceamento entre CPU e compressão
         });
-    }
-
-    private static void ConfigureEnvironment()
-    {
-        Env.Load();
-        ValidateEnvironmentVariables();
-    }
-
-    private static void ValidateEnvironmentVariables()
-    {
-        var requiredVars = new[] { "DB_USER", "DB_PASS", "JWT_KEY" };
-        foreach (var varName in requiredVars)
-        {
-            if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable(varName)))
-            {
-                throw new InvalidOperationException($"A variável {varName} não foi encontrado no arquivo de ambiente.");
-            }
-        }
     }
 
     private static void ConfigureMongoDb(WebApplicationBuilder builder)
@@ -233,6 +253,9 @@ public static class Setup
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
+        // Aplica a política de CORS
+        app.UseCors("AllowSpecificOrigin");
 
         app.UseHttpsRedirection();
         app.UseAuthentication();

@@ -9,8 +9,11 @@ using ProjectMBackend.Endpoints.Review;
 using ProjectMBackend.Endpoints.User;
 using ProjectMBackend.Models;
 using System.IO.Compression;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 public static class Setup
 {
@@ -200,6 +203,8 @@ public static class Setup
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddSingleton<Auth>();
+        builder.Services.AddFluentValidationAutoValidation();
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
     public static void InitializeCollections(WebApplication app)

@@ -1,4 +1,7 @@
-﻿using MongoDB.Driver;
+﻿using System.ComponentModel.DataAnnotations;
+using FluentValidation;
+using MongoDB.Driver;
+using ProjectMBackend.Models;
 
 namespace ProjectMBackend.Endpoints.User
 {
@@ -6,8 +9,12 @@ namespace ProjectMBackend.Endpoints.User
     {
         public static void Map(WebApplication app)
         {
-            app.MapPost("/User/Insert", static async (Models.User u, IMongoDatabase db) =>
+            app.MapPost("/User/Insert", async (Models.User u, IMongoDatabase db, IValidator<Models.User> validator) =>
             {
+                var validationResult = await validator.ValidateAsync(u);
+                if (!validationResult.IsValid)
+                    return Results.BadRequest(validationResult.Errors);
+
                 if (u.Exists())
                 {
                     return Results.BadRequest(

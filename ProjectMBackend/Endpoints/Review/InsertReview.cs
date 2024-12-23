@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using FluentValidation;
+using MongoDB.Driver;
 
 namespace ProjectMBackend.Endpoints.Review
 {
@@ -6,8 +7,12 @@ namespace ProjectMBackend.Endpoints.Review
     {
         public static void Map(WebApplication app)
         {
-            app.MapPost("/Reviews/Insert", async (Models.Review r, IMongoDatabase db) =>
+            app.MapPost("/Reviews/Insert", async (Models.Review r, IMongoDatabase db, IValidator<Models.Review> validator) =>
             {
+                var validationResult = await validator.ValidateAsync(r);
+                if (!validationResult.IsValid)
+                    return Results.BadRequest(validationResult.Errors);
+
                 r.CreatedAt = DateTime.Now;
 
                 try

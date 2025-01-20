@@ -20,4 +20,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProjectMBackend.ServiceDefaults\ProjectMBackend.ServiceDefaults.csproj" />
+  </ItemGroup>
 </Project>

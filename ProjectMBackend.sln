@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35514.174 d17.12
+VisualStudioVersion = 17.12.35514.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectMBackend", "ProjectMBackend\ProjectMBackend.csproj", "{DB4C3E8D-EF9A-4895-B212-01F81F89E5C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectMBackend.AppHost", "ProjectMBackend.AppHost\ProjectMBackend.AppHost.csproj", "{5D9ADD8C-6976-482B-B429-CDA6275AB8C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectMBackend.ServiceDefaults", "ProjectMBackend.ServiceDefaults\ProjectMBackend.ServiceDefaults.csproj", "{B7C0863D-F1F0-4F09-BE9F-7968A9CDD5C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{DB4C3E8D-EF9A-4895-B212-01F81F89E5C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB4C3E8D-EF9A-4895-B212-01F81F89E5C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB4C3E8D-EF9A-4895-B212-01F81F89E5C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D9ADD8C-6976-482B-B429-CDA6275AB8C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D9ADD8C-6976-482B-B429-CDA6275AB8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D9ADD8C-6976-482B-B429-CDA6275AB8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D9ADD8C-6976-482B-B429-CDA6275AB8C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7C0863D-F1F0-4F09-BE9F-7968A9CDD5C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7C0863D-F1F0-4F09-BE9F-7968A9CDD5C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7C0863D-F1F0-4F09-BE9F-7968A9CDD5C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7C0863D-F1F0-4F09-BE9F-7968A9CDD5C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

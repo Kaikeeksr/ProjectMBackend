@@ -1,34 +1,38 @@
 ﻿using MongoDB.Driver;
 using ProjectMBackend.AuthModel;
 using ProjectMBackend.Models;
-using Microsoft.AspNetCore.Http.HttpResults;
 
-public static class Login
+namespace ProjectMBackend.Models
 {
-    public record LoginRequest(string Username, string Password);
-    public record LoginResponse(string Message, string Status, string? Token);
-
-    public static async Task<IResult> SignIn(LoginRequest req, IMongoDatabase db, Auth auth)
+    public class Login
     {
-        var userCollection = db.GetCollection<User>("users");
-        var user = await userCollection.Find(x => x.Username == req.Username)
-                                     .FirstOrDefaultAsync();
+        public required string Username { get; set; }
+        public required string Password { get; set; }
 
-        if (user == null || !VerifyPassword(req.Password, user))
+        public record LoginResponse(string Message, string Status, string? Token);
+
+        public static async Task<IResult> SignIn(Login login, IMongoDatabase db, Auth auth)
         {
-            return TypedResults.BadRequest(
-                new LoginResponse("Usuário ou senha incorretos", "NOT_OK", null)
+            var userCollection = db.GetCollection<User>("users");
+            var user = await userCollection.Find(x => x.Username == login.Username)
+                                         .FirstOrDefaultAsync();
+
+            if (user == null || !VerifyPassword(login.Password, user.Password))
+            {
+                return TypedResults.BadRequest(
+                    new LoginResponse("Credenciais inválidas", "NOT_OK", null)
+                );
+            }
+
+            var token = auth.GenerateJwt(user);
+            return TypedResults.Ok(
+                new LoginResponse("Login efetuado com sucesso", "OK", token)
             );
         }
 
-        var token = auth.GenerateJwt(user);
-        return TypedResults.Ok(
-            new LoginResponse("Login efetuado com sucesso", "OK", token)
-        );
-    }
-
-    private static bool VerifyPassword(string password, User user)
-    {
-        return BCrypt.Net.BCrypt.Verify(password, user.Password);
+        private static bool VerifyPassword(string inputPassword, string hashedPassword)
+        {
+            return BCrypt.Net.BCrypt.Verify(inputPassword, hashedPassword);
+        }
     }
 }

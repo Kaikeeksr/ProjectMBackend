@@ -2,13 +2,12 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using ProjectMBackend.Configurations;
 
 namespace ProjectMBackend.Models
 {
     public class User
     {
-        private static IMongoCollection<User>? _collection;
-
         [BsonId]
         public ObjectId Id { get; set; }
         public required string FirstName { get; set; }
@@ -20,19 +19,47 @@ namespace ProjectMBackend.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
 
-        public static void Initialize(IMongoCollection<User> collection)
+        public record SignUpResponse(string Message, string Status, User? User);
+
+        public static async Task<IResult> SignUp(User u, IMongoDatabase db)
         {
-            _collection = collection;
+            var v = new UserValidator();
+            var validationResult = await v.ValidateAsync(u);
+            if (!validationResult.IsValid)
+                return Results.BadRequest(validationResult.Errors);
+
+            if (await u.Exists())
+            {
+                return TypedResults.BadRequest(
+                    new SignUpResponse("Esse usuário já existe", "NOT_OK", null)
+                );
+            }
+
+            try
+            {
+                u.Password = BCrypt.Net.BCrypt.HashPassword(u.Password);
+                u.CreatedAt = DateTime.Now;
+                u.IsActive = true;
+
+                var userCollection = db.GetCollection<Models.User>("users");
+                await userCollection.InsertOneAsync(u);
+
+                return TypedResults.Ok(
+                    new SignUpResponse("Usuário cadastrado com sucesso", "OK", u)
+                );
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(new { message = "Erro ao cadastar o usuário.", error = ex.Message });
+            }
         }
 
-        public bool Exists()
+        public async Task<bool> Exists()
         {
-            if (_collection == null)
-                throw new InvalidOperationException("Collection not initialized");
-
-            return _collection.Find(x => x.Username == Username).Any();
+            return await DatabaseSetup.dbContext.Users
+                .Find(u => u.Username == Username)
+                .AnyAsync();
         }
-
     }
 
     public class UserValidator : AbstractValidator<User>

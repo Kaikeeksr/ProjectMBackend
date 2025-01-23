@@ -5,6 +5,14 @@ namespace ProjectMBackend.Configurations
 {
     public static class DatabaseSetup
     {
+        // Classe estática para acesso global -> inicialização do db nas classes
+        public static class dbContext 
+        {
+            public static IMongoDatabase Database { get; internal set; } = null!;
+            public static IMongoCollection<User> Users { get; internal set; } = null!;
+            public static IMongoCollection<Review> Reviews { get; internal set; } = null!;
+        }
+
         private static string GetMongoConnectionString()
         {
             var dbUser = Environment.GetEnvironmentVariable("DB_USER");
@@ -35,11 +43,16 @@ namespace ProjectMBackend.Configurations
 
         public static WebApplication InitializeDatabase(this WebApplication app)
         {
-            using var scope = app.Services.CreateScope();
-            var database = scope.ServiceProvider.GetRequiredService<IMongoDatabase>();
 
-            CreateUserIndexes(database);
-            CreateReviewIndexes(database);
+            using var scope = app.Services.CreateScope();
+
+            // Inicializa o contexto estático
+            dbContext.Database = scope.ServiceProvider.GetRequiredService<IMongoDatabase>();
+            dbContext.Users = scope.ServiceProvider.GetRequiredService<IMongoCollection<User>>();
+            dbContext.Reviews = scope.ServiceProvider.GetRequiredService<IMongoCollection<Review>>();
+
+            CreateUserIndexes(dbContext.Database);
+            CreateReviewIndexes(dbContext.Database);
 
             return app;
         }

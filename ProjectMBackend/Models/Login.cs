@@ -1,43 +1,30 @@
 ﻿using MongoDB.Driver;
 using ProjectMBackend.AuthModel;
 using ProjectMBackend.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 
-public class Login
+public static class Login
 {
-    public required string Username { get; set; }
-    public required string Password { get; set; }
+    public record LoginRequest(string Username, string Password);
+    public record LoginResponse(string Message, string Status, string? Token);
 
-    public class LoginResponse
-    {
-        public string Message { get; set; }
-        public string Status { get; set; }
-        public string? Token { get; set; }
-    }
-
-    public async Task<IResult> SignIn(IMongoDatabase db, Auth auth)
+    public static async Task<IResult> SignIn(LoginRequest req, IMongoDatabase db, Auth auth)
     {
         var userCollection = db.GetCollection<User>("users");
-        var user = await userCollection.Find(x => x.Username == Username)
+        var user = await userCollection.Find(x => x.Username == req.Username)
                                      .FirstOrDefaultAsync();
 
-        if (user == null || !VerifyPassword(Password, user))
+        if (user == null || !VerifyPassword(req.Password, user))
         {
-            return Results.BadRequest(new LoginResponse
-            {
-                Message = "Username ou senha inválidos",
-                Status = "NOT_OK",
-                Token = null
-            });
+            return TypedResults.BadRequest(
+                new LoginResponse("Usuário ou senha incorretos", "NOT_OK", null)
+            );
         }
 
         var token = auth.GenerateJwt(user);
-
-        return Results.Ok(new LoginResponse
-        {
-            Message = "Login efetuado com sucesso",
-            Status = "OK",
-            Token = token
-        });
+        return TypedResults.Ok(
+            new LoginResponse("Login efetuado com sucesso", "OK", token)
+        );
     }
 
     private static bool VerifyPassword(string password, User user)

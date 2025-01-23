@@ -1,15 +1,19 @@
+using ProjectMBackend.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
-
-Setup.ConfigureServices(builder);
+builder.AddServiceDefaults()
+       .ConfigureAppSettings()    
+       .ConfigureCors()           
+       .ConfigureCompression()    
+       .ConfigureAuthentication() 
+       .ConfigureMongoDb();       
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
-
-Setup.InitializeCollections(app);
-Setup.ConfigureEndpoints(app);
-Setup.ConfigureMiddleware(app);
+app.MapDefaultEndpoints()
+   .InitializeDatabase()          
+   .ConfigureMiddleware()         
+   .ConfigureEndpoints();         
 
 app.Run();

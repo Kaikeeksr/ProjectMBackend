@@ -8,9 +8,9 @@ namespace ProjectMBackend.Endpoints.User
     {
         public static void Map(WebApplication app)
         {
-            app.MapPost("/User/Login", async (Login l, IMongoDatabase db, Auth auth) =>
+            app.MapPost("/User/Login", async (Login l) =>
             {
-                return await Login.SignIn(l, db, auth);
+                return await Login.SignIn(l);
             })
             .Produces<Login.LoginResponse>(StatusCodes.Status200OK)
             .Produces<Login.LoginResponse>(StatusCodes.Status400BadRequest);

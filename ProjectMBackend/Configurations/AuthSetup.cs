@@ -44,6 +44,12 @@ namespace ProjectMBackend.Configurations
 
         private static Task HandleMissingToken(MessageReceivedContext context)
         {
+            string authorizationHeader = context.HttpContext.Request.Headers["Authorization"];
+            
+            if (!string.IsNullOrEmpty(authorizationHeader) && authorizationHeader.StartsWith("Bearer "))
+                context.Token = authorizationHeader.Substring("Bearer ".Length).Trim();
+            
+
             var endpoint = context.HttpContext.GetEndpoint();
             var isAuthRequired = endpoint?.Metadata.GetMetadata<AuthorizeAttribute>() != null;
 

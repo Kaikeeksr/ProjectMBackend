@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
+using ProjectMBackend.Configurations;
 
 namespace ProjectMBackend.Models
 {
@@ -19,6 +21,37 @@ namespace ProjectMBackend.Models
         public required int MovieReleaseYear { get; set; }
         public string? Genre { get; set; }
         public DateTime? CreatedAt { get; set; }
+
+        public record InsertReviewResponse(string Status, string? Message, Review? review);
+
+        public static async Task<IResult> InsertReview(Review r)
+        {
+            var v = new ReviewValidator();
+            var validationResult = await v.ValidateAsync(r);
+
+            if (!validationResult.IsValid)
+                return Results.BadRequest(validationResult.Errors);
+
+            r.CreatedAt = DateTime.Now;
+
+            try
+            {
+                await DatabaseSetup.dbContext.Reviews.InsertOneAsync(r);
+
+                return Results.Created(
+                    $"/Reviews/{r.ReviewId}",
+                    new InsertReviewResponse("OK", "Review cadastrado com sucesso", r)
+                );
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(
+                    new InsertReviewResponse("NOT_OK", $"Erro ao cadastrar o review. {ex.Message}", null)    
+                );
+            }
+        }
+
+        //FindAll();
     }
 
     public class ReviewValidator : AbstractValidator<Review> 

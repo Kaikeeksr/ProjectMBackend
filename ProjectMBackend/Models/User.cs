@@ -21,10 +21,11 @@ namespace ProjectMBackend.Models
 
         public record SignUpResponse(string Message, string Status, User? User);
 
-        public static async Task<IResult> SignUp(User u, IMongoDatabase db)
+        public static async Task<IResult> SignUp(User u)
         {
             var v = new UserValidator();
             var validationResult = await v.ValidateAsync(u);
+
             if (!validationResult.IsValid)
                 return Results.BadRequest(validationResult.Errors);
 
@@ -41,7 +42,7 @@ namespace ProjectMBackend.Models
                 u.CreatedAt = DateTime.Now;
                 u.IsActive = true;
 
-                var userCollection = db.GetCollection<Models.User>("users");
+                var userCollection = DatabaseSetup.dbContext.Users;
                 await userCollection.InsertOneAsync(u);
 
                 return TypedResults.Ok(

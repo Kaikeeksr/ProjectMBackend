@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using ProjectMBackend.AuthModel;
+using ProjectMBackend.Configurations;
 using ProjectMBackend.Models;
 
 namespace ProjectMBackend.Models
@@ -11,9 +12,9 @@ namespace ProjectMBackend.Models
 
         public record LoginResponse(string Message, string Status, string? Token);
 
-        public static async Task<IResult> SignIn(Login login, IMongoDatabase db, Auth auth)
+        public static async Task<IResult> SignIn(Login login)
         {
-            var userCollection = db.GetCollection<User>("users");
+            var userCollection = DatabaseSetup.dbContext.Users;
             var user = await userCollection.Find(x => x.Username == login.Username)
                                          .FirstOrDefaultAsync();
 
@@ -24,6 +25,7 @@ namespace ProjectMBackend.Models
                 );
             }
 
+            var auth = new Auth();
             var token = auth.GenerateJwt(user);
             return TypedResults.Ok(
                 new LoginResponse("Login efetuado com sucesso", "OK", token)

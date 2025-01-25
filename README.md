@@ -1,6 +1,8 @@
 # 🎬 ProjectM Backend  
 
 API de reviews de filmes desenvolvida em .NET 9.0 com arquitetura Minimal API e ASPIRE.
+- 🏗️ Projeto em construção...
+- [Repositório do frontend](https://github.com/Kaikeeksr/ProjectMFrontend)
 
 ## ⚙️ Funcionalidades  
 - Autenticação JWT de usuários

@@ -14,22 +14,30 @@ namespace ProjectMBackend.Models
 
         public static async Task<IResult> SignIn(Login login)
         {
-            var userCollection = DatabaseSetup.dbContext.Users;
-            var user = await userCollection.Find(x => x.Username == login.Username)
-                                         .FirstOrDefaultAsync();
-
-            if (user == null || !VerifyPassword(login.Password, user.Password))
+            try
             {
-                return TypedResults.BadRequest(
-                    new LoginResponse("Credenciais inválidas", "NOT_OK", null)
+                var userCollection = DatabaseSetup.dbContext.Users;
+                var user = await userCollection.Find(x => x.Username == login.Username)
+                                             .FirstOrDefaultAsync();
+
+                if (user == null || !VerifyPassword(login.Password, user.Password))
+                {
+                    return TypedResults.BadRequest(
+                        new LoginResponse("Credenciais inválidas", "NOT_OK", null)
+                    );
+                }
+
+                var auth = new Auth();
+                var token = auth.GenerateJwt(user);
+                return TypedResults.Ok(
+                    new LoginResponse("Login efetuado com sucesso", "OK", token)
                 );
             }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(new { message = "Erro ao efetuar login.", error = ex.Message });
 
-            var auth = new Auth();
-            var token = auth.GenerateJwt(user);
-            return TypedResults.Ok(
-                new LoginResponse("Login efetuado com sucesso", "OK", token)
-            );
+            }
         }
 
         private static bool VerifyPassword(string inputPassword, string hashedPassword)

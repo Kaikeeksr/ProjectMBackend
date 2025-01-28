@@ -1,9 +1,4 @@
-﻿using Microsoft.Extensions.Configuration.UserSecrets;
-using MongoDB.Driver;
-using Sprache;
-using System.ComponentModel.DataAnnotations;
-
-namespace ProjectMBackend.Endpoints.Review
+﻿namespace ProjectMBackend.Endpoints.Review
 {
     public class GetAllReviews
     {

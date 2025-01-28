@@ -1,6 +1,4 @@
-﻿using MongoDB.Driver;
-using ProjectMBackend.AuthModel;
-using Login = ProjectMBackend.Models.Login;
+﻿using Login = ProjectMBackend.Models.Login;
 
 namespace ProjectMBackend.Endpoints.User
 {

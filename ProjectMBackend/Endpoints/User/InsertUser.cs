@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
 using UserModel = ProjectMBackend.Models.User; // Alias para evitar conflito
 
 namespace ProjectMBackend.Endpoints.User

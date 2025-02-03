@@ -11,6 +11,9 @@ builder.AddServiceDefaults()
 
 var app = builder.Build();
 
+app.UseCors("AllowSpecificOrigin");
+
+
 app.MapDefaultEndpoints()
    .InitializeDatabase()          
    .ConfigureMiddleware()         

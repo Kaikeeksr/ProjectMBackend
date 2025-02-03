@@ -37,12 +37,13 @@ namespace ProjectMBackend.Configurations
         public static WebApplicationBuilder ConfigureCors(this WebApplicationBuilder builder)
         {
             var localhost = Environment.GetEnvironmentVariable("LOCALHOST")!;
+            var androidHost = Environment.GetEnvironmentVariable("ANDROID_HOST")!;
 
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin", policy =>
                 {
-                    policy.WithOrigins(localhost)
+                    policy.WithOrigins(localhost, androidHost)
                           .AllowAnyHeader()
                           .AllowAnyMethod();
                 });

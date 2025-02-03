@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using Review = ProjectMBackend.Models.Review;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace ProjectMBackend.Endpoints.Review
 {

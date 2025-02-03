@@ -23,6 +23,7 @@ namespace ProjectMBackend.Models
         public DateTime? CreatedAt { get; set; }
 
         public record InsertReviewResponse(string Status, string? Message, Review? review);
+        public record FindAllReviewResponse(string Status, string Message, List<Review>? reviews);
 
         public static async Task<IResult> InsertReview(Review r)
         {
@@ -51,7 +52,41 @@ namespace ProjectMBackend.Models
             }
         }
 
-        //FindAll();
+        public static async Task<IResult> FindAll(string? userId)
+        {
+            if (String.IsNullOrEmpty(userId))
+            {
+                return Results.BadRequest(
+                    new FindAllReviewResponse("NOT_OK", "Id não informado", null)
+                );
+            }
+
+            try
+            {
+                var reviewsCollection = DatabaseSetup.dbContext.Reviews;
+
+                var reviews = await reviewsCollection
+                    .Find(review => review.UserId == userId)
+                    .ToListAsync();
+
+                if (reviews.Count == 0)
+                {
+                    return Results.NotFound(
+                        new FindAllReviewResponse("NOT_OK", $"Não foi encontrado nenhum review para o id: {userId}", null)    
+                    );
+                }
+
+                return Results.Ok(
+                    new FindAllReviewResponse("OK", "Reviews encontrados com sucesso", reviews)
+                );
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(
+                   new FindAllReviewResponse("NOT_OK", $"Erro ao buscar reviews. Erro: {ex.Message}", null)    
+                );
+            }
+        }
     }
 
     public class ReviewValidator : AbstractValidator<Review> 

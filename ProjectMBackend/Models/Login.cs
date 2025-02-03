@@ -1,7 +1,6 @@
 ﻿using MongoDB.Driver;
 using ProjectMBackend.AuthModel;
 using ProjectMBackend.Configurations;
-using ProjectMBackend.Models;
 
 namespace ProjectMBackend.Models
 {
